@@ -88,3 +88,9 @@ vim.api.nvim_create_autocmd({ "CursorMoved", "TextChanged", "TextChangedI" }, {
 		lock = false
 	end
 })
+
+saxum.TODO = function()
+	Error("Not implemented yet")
+end
+
+return saxum
