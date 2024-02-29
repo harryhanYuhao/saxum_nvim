@@ -45,6 +45,7 @@ local function init()
 
 	saxum.logFileName = getUnusedFileName()
 	local logFilePath = saxum.dataDir .. "/" .. saxum.logFileName
+	appendLnToFile(logFilePath, "nvim")
 	appendLnToFile(logFilePath, vim.fn.expand("%:p"))
 end
 
@@ -54,9 +55,10 @@ local function recordDone()
 	end
 	local logFilePath = saxum.dataDir .. "/" .. saxum.logFileName
 	appendLnToFile(logFilePath, "DONE")
+	initiatilized = false
 end
 
-vim.api.nvim_create_autocmd( { "BufWinLeave" }, {
+vim.api.nvim_create_autocmd( { "BufUnload" }, {
 	callback = function()
 		recordDone()
 	end
@@ -65,7 +67,6 @@ vim.api.nvim_create_autocmd( { "BufWinLeave" }, {
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
 	callback = function()
 		recordDone()
-		initiatilized = false
 	end
 })
 
